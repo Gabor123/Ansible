@@ -1,0 +1,44 @@
+{
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "centos/7",
+      "provider": "virtualbox",
+      "type": "vagrant",
+      "output_dir": "output-packer-docker"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "echo \"install basic helper tools\"",
+        "sudo yum install -y net-tools",
+        "sudo sed -i \"s/PasswordAuthentication.*/PasswordAuthentication yes/g\" /etc/ssh/sshd_config"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo \"install mdns\"",
+        "sudo yum install -y epel-release",
+        "sudo yum install -y avahi avahi-tools nss-mdns",
+        "sudo systemctl enable avahi-daemon"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo \"install docker and compose\"",
+        "sudo yum install -y yum-utils",
+        "sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo",
+        "sudo yum install -y docker-ce docker-ce-cli containerd.io",
+        "sudo systemctl enable docker",
+
+        "sudo curl -L \"https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+        "sudo chmod +x /usr/local/bin/docker-compose",
+        "sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose"
+      ]
+    }
+  ]
+}

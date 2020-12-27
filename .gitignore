@@ -1,0 +1,5 @@
+.idea/
+packer_cache/
+initialize/output*/
+initialize/*.box
+.vagrant/
