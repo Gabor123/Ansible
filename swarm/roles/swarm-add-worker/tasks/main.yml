@@ -1,0 +1,12 @@
+- name: Check if node has already been joined
+  shell: "docker info | grep 'Swarm: active'"
+  register: node_status
+  ignore_errors: true
+  become: yes
+  tags: swarm
+
+- name: Add Workers to the Swarm
+  shell: "docker swarm join --token {{ hostvars['swarm-manager']['worker_token']['stdout'] }} {{ hostvars['swarm-manager'].ansible_host }}:2377"
+  when: node_status.rc != 0
+  become: yes
+  tags: swarm

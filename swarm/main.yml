@@ -1,3 +1,9 @@
-- hosts: all
+- name: initialize docker swarm
+  hosts: swarm-managers
   roles:
-  - role: test
+    - swarm-init
+
+- name: add workers to the swarm
+  hosts: swarm-workers
+  roles:
+    - swarm-add-worker

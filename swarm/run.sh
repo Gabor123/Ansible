@@ -1,2 +1,2 @@
 #!/bin/sh
-ansible-playbook -i dev-inventory.ini main.yml
+ansible-playbook -i test-inventory.ini main.yml
