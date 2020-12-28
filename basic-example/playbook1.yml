@@ -9,6 +9,6 @@
   hosts: group1
   vars:
     custom_var1: 10
-    custom_var1: 20
+    custom_var2: 20
   roles:
     - role2

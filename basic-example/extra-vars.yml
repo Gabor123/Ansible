@@ -1,0 +1,11 @@
+extra_var1: test1
+extra_var2: test2
+
+extra_dict:
+  field1: one
+  field2: two
+
+extra_list:
+  - first
+  - second
+  - third
