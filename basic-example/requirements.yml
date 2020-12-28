@@ -1,0 +1,5 @@
+# This is used to manage Ansible Galaxy role dependences
+
+#- name: extradeps
+#  src: https://user:passwd@github.com/...
+#  version: origin/master
