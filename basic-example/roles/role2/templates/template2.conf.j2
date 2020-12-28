@@ -1,0 +1,11 @@
+line1 = {{ default_var1 }}
+
+{% for host in groups['group1'] %}
+{{ host }}
+{% endfor %}
+
+{% if default_var1 == "test" %}
+success
+{% else %}
+fail
+{% endif %}

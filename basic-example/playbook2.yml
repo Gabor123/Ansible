@@ -1,0 +1,31 @@
+#play1
+- name: play1
+  hosts: group1
+  vars:
+    var1: value1
+    var2: value2
+
+  tasks:
+    - name: Install net-tools
+      yum:
+        name: net-tools
+        state: present
+      register: result
+
+  pre_tasks:
+    - name: Pre_task1
+      debug:
+        msg: 'This is pre_task1'
+
+    - name: Pre_task2
+      debug:
+        msg: 'This is pre_task2'
+
+  post_tasks:
+    - name: Post_task1
+      debug:
+        msg: 'This is post_task1'
+
+    - name: Post_task2
+      debug:
+        msg: 'This is post_task2'

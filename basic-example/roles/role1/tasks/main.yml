@@ -1,0 +1,36 @@
+- name: simple file copy
+  copy: src=file1.txt dest=/etc/file1.txt
+  register: copy_status
+  become: yes
+  notify:
+  - restart something
+  - restart something2
+
+- name: simple template copy
+  template: src=template1.conf.j2 dest=/etc/template1.conf
+  register: template_status
+  become: yes
+  tags: copy
+
+- name: echo role variables
+  debug:
+    msg: "The value of variable is: {{ role_var1 }} {{ my_dict['field1'] }} {{ my_list[0] }}"
+
+- name: debug in loop
+  debug:
+    msg: "{{ item.name }} = {{ item.groups }}"
+  loop:
+    - { name: 'testuser1', groups: 'wheel' }
+    - { name: 'testuser2', groups: 'root' }
+
+- name: debug in loop2
+  debug:
+    msg: "{{ item }}"
+  loop: "{{ my_list }}"
+
+- name: Include variables from file
+  include_vars: include1.yml
+
+- name: echo include vars
+  debug:
+    msg: "{{ inc_variable1 }}"

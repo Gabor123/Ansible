@@ -1,0 +1,11 @@
+default_var1: test1
+default_var2: test2
+
+default_dict:
+  field1: one
+  field2: two
+
+default_list:
+  - first
+  - second
+  - third

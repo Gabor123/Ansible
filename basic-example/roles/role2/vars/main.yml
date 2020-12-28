@@ -1,0 +1,11 @@
+role_var1: test1
+role_var2: test2
+
+my_dict:
+  field1: one
+  field2: two
+
+my_list:
+  - first
+  - second
+  - third

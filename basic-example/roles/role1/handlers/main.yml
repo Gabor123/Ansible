@@ -1,0 +1,7 @@
+- name: restart something
+  shell: "echo restarting..."
+  become: yes
+
+- name: restart something2
+  shell: "echo restarting..."
+  become: yes

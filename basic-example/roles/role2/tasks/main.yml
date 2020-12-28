@@ -1,0 +1,44 @@
+- name: Attempt and graceful roll back demo
+  vars:
+    block_level_var1: value1
+    block_level_var2: value2
+  become: yes
+  block:
+    - name: Print a message
+      debug:
+        msg: 'I execute normally'
+
+    - name: Print a message2
+      debug:
+        msg: 'I never execute, if the above task failing'
+  rescue:
+    - name: Print when errors
+      debug:
+        msg: 'I caught an error'
+
+    - name: Print when errors2
+      debug:
+        msg: 'I caught an error'
+  always:
+    - name: Always do this
+      debug:
+        msg: "This always executes"
+
+- name: Normal task
+  debug:
+    msg: "The executes normally, even if the above fail, due to rescue branch"
+
+- name: Check
+  shell: "echo hello"
+  register: check_status
+  ignore_errors: true
+
+- name: Template a file to /etc/file.conf
+  become: yes
+  template:
+    src: template1.conf.j2
+    dest: /etc/template1.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: check_status.rc != 0

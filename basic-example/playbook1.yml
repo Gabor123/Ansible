@@ -1,0 +1,14 @@
+#play1
+- name: play1
+  hosts: group1
+  roles:
+    - role1
+
+#play2
+- name: play2
+  hosts: group1
+  vars:
+    custom_var1: 10
+    custom_var1: 20
+  roles:
+    - role2
