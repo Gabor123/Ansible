@@ -13,7 +13,7 @@
       "type": "shell",
       "inline": [
         "echo \"install basic helper tools\"",
-        "sudo yum install -y net-tools",
+        "sudo yum install -y net-tools unzip telnet bind-utils nc",
         "sudo sed -i \"s/PasswordAuthentication.*/PasswordAuthentication yes/g\" /etc/ssh/sshd_config"
       ]
     },
