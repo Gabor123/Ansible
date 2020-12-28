@@ -12,7 +12,7 @@
   become: yes
   tags: copy
 
-- name: echo role variables
+- name: print role variables
   debug:
     msg: "The value of variable is: {{ role_var1 }} {{ my_dict['field1'] }} {{ my_list[0] }}"
 
@@ -31,6 +31,10 @@
 - name: Include variables from file
   include_vars: include1.yml
 
-- name: echo include vars
+- name: print include vars
   debug:
     msg: "{{ inc_variable1 }}"
+
+- name: print result variable
+  debug:
+    msg: "{{ hostvars[inventory_hostname].copy_status.changed }}"
