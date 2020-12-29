@@ -38,3 +38,11 @@
 - name: print result variable
   debug:
     msg: "{{ hostvars[inventory_hostname].copy_status.changed }}"
+
+- name: multiline shell
+  shell: |
+    cat <<EOF
+    First line.
+    Second line.
+    EOF
+  tags: multi
