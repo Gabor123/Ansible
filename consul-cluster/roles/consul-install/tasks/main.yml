@@ -10,11 +10,16 @@
     dest: /tmp/consul.zip
   when: is_consul_installed.rc != 0
 
+- name: create consul user
+  user:
+    name: consul
+  become: yes
+
 - name: install consul
   shell:
      cmd: |
        unzip consul.zip && install consul /usr/bin && rm -rf consul.zip consul
-       mkdir -p {{ CONSUL_CONFIG_DIR }}/{bootstrap,server,client} {{ CONSUL_DATA_DIR }}
+       mkdir -p {{ CONSUL_CONFIG_DIR }} {{ CONSUL_DATA_DIR }}
      chdir: /tmp
   become: yes
   when: is_consul_installed.rc != 0

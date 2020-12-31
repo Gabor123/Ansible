@@ -1,0 +1,14 @@
+{
+    "ui" : true,
+    "server": true,
+    "bootstrap": false,
+    "datacenter": "dc1",
+    "node_name": "{{ ansible_ssh_host }}",
+    "data_dir": "{{ CONSUL_DATA_DIR }}",
+    "client_addr" : "0.0.0.0",
+    "bind_addr": "{{ hostvars[inventory_hostname].ansible_host }}",
+    "enable_script_checks": true,
+    "start_join": ["{{ hostvars['consul-server'].ansible_host }}"],
+    "log_level": "INFO",
+    "enable_syslog": true
+}

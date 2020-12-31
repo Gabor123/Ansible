@@ -2,3 +2,27 @@
   hosts: all
   roles:
     - consul-install
+
+- name: bootstrap consul
+  hosts: consul-server
+  roles:
+    - consul-bootstrap
+
+- name: add more consul server
+  hosts: consul-agent1
+  roles:
+    - consul-add-server
+
+- name: add consul clients
+  hosts: consul-agent2
+  roles:
+    - consul-add-client
+
+- name: start consul cluster
+  hosts: all
+  vars:
+    CONSUL_CONFIG_DIR: /etc/consul.d
+  tasks:
+    - name: start consul servers
+      shell:  consul agent -config-dir={{ CONSUL_CONFIG_DIR }} &
+      become: yes
