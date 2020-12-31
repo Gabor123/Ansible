@@ -11,7 +11,10 @@
   when: is_consul_installed.rc != 0
 
 - name: install consul
-  shell: |
-     cd /tmp && unzip consul.zip && install consul /usr/bin
+  shell:
+     cmd: |
+       unzip consul.zip && install consul /usr/bin && rm -rf consul.zip consul
+       mkdir -p {{ CONSUL_CONFIG_DIR }}/{bootstrap,server,client} {{ CONSUL_DATA_DIR }}
+     chdir: /tmp
   become: yes
   when: is_consul_installed.rc != 0
