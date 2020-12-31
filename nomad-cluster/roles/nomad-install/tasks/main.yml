@@ -1,0 +1,17 @@
+- name: check if nomad has already been installed
+  shell: nomad -h
+  register: is_nomad_installed
+  ignore_errors: true
+  become: yes
+
+- name: download nomad
+  get_url:
+    url: https://releases.hashicorp.com/nomad/{{ NOMAD_VERSION }}/nomad_{{ NOMAD_VERSION }}_linux_amd64.zip
+    dest: /tmp/nomad.zip
+  when: is_nomad_installed.rc != 0
+
+- name: install nomad
+  shell: |
+     cd /tmp && unzip nomad.zip && install nomad /usr/bin
+  become: yes
+  when: is_nomad_installed.rc != 0

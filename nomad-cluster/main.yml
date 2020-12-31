@@ -1,0 +1,4 @@
+- name: install nomad
+  hosts: all
+  roles:
+    - nomad-install
