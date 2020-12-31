@@ -1,2 +1,2 @@
 #!/bin/sh
-ansible-playbook -i inventories/test main.yml
+ansible-playbook -i inventories/dev main.yml
