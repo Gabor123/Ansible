@@ -1,0 +1,4 @@
+- name: install vault
+  hosts: all
+  roles:
+    - vault-install

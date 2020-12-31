@@ -1,0 +1,17 @@
+- name: check if vault has already been installed
+  shell: vault -h
+  register: is_vault_installed
+  ignore_errors: true
+  become: yes
+
+- name: download vault
+  get_url:
+    url: https://releases.hashicorp.com/vault/{{ VAULT_VERSION }}/vault_{{ VAULT_VERSION }}_linux_amd64.zip
+    dest: /tmp/vault.zip
+  when: is_vault_installed.rc != 0
+
+- name: install vault
+  shell: |
+     cd /tmp && unzip vault.zip && install vault /usr/bin
+  become: yes
+  when: is_vault_installed.rc != 0
