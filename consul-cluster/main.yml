@@ -1,0 +1,4 @@
+- name: install consul
+  hosts: all
+  roles:
+    - consul-install

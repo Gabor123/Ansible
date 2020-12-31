@@ -1,0 +1,17 @@
+- name: check if consul has already been installed
+  shell: consul -h
+  register: is_consul_installed
+  ignore_errors: true
+  become: yes
+
+- name: download consul
+  get_url:
+    url: https://releases.hashicorp.com/consul/{{ CONSUL_VERSION }}/consul_{{ CONSUL_VERSION }}_linux_amd64.zip
+    dest: /tmp/consul.zip
+  when: is_consul_installed.rc != 0
+
+- name: install consul
+  shell: |
+     cd /tmp && unzip consul.zip && install consul /usr/bin
+  become: yes
+  when: is_consul_installed.rc != 0
