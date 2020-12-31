@@ -1,0 +1,9 @@
+- name: copy docker compose file
+  copy: src=docker-compose.yml dest=/opt/docker-compose-test/
+  run_once: true
+  become: yes
+
+- name: stack deploy
+  shell: docker stack deploy -c /opt/docker-compose-test/docker-compose.yml test
+  run_once: true
+  become: yes

@@ -12,3 +12,8 @@
   hosts: swarm-workers
   roles:
     - swarm-add-worker
+
+- name: deploy demo stack
+  hosts: swarm-manager
+  roles:
+    - demo-stack

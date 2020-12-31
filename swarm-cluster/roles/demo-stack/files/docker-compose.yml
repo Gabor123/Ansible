@@ -1,0 +1,24 @@
+version: '3.2'
+
+services:
+  test:
+    image: praqma/network-multitool
+    command: tail -f /dev/null
+    ports:
+      - "22500:22500"
+    networks:
+      - test_network
+    volumes:
+      - data:/data
+    deploy:
+      mode: global
+    cap_add:
+      - ALL
+
+networks:
+  test_network:
+    driver: overlay
+    attachable: true
+
+volumes:
+  data:
