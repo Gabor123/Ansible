@@ -18,11 +18,18 @@
   roles:
     - consul-add-client
 
+- name: configure consul systemd service on all node
+  hosts: all
+  roles:
+    - consul-systemd
+
 - name: start consul cluster
   hosts: all
-  vars:
-    CONSUL_CONFIG_DIR: /etc/consul.d
   tasks:
     - name: start consul servers
-      shell:  consul agent -config-dir={{ CONSUL_CONFIG_DIR }} &
+      systemd:
+        name: consul
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
       become: yes

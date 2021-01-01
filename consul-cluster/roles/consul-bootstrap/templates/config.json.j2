@@ -10,5 +10,11 @@
     "bootstrap_expect": 1,
     "enable_script_checks": true,
     "log_level": "INFO",
-    "enable_syslog": true
+    "enable_syslog": true,
+    "connect": {
+        "enabled": true
+    },
+    "acl": {
+        "enabled": {{ CONSUL_ACL_ENABLED }}
+    }
 }

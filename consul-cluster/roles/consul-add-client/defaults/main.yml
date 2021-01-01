@@ -1,2 +1,3 @@
 CONSUL_DATA_DIR: /opt/consul
 CONSUL_CONFIG_DIR: /etc/consul.d
+CONSUL_ACL_ENABLED: "false"
