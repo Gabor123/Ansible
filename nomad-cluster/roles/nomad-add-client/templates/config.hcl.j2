@@ -1,0 +1,22 @@
+# Increase log verbosity
+log_level = "DEBUG"
+bind_addr = "0.0.0.0"
+
+advertise {
+  # Defaults to the first private IP address.
+  http = "{{ hostvars[inventory_hostname].ansible_host }}"
+  rpc  = "{{ hostvars[inventory_hostname].ansible_host }}"
+  serf = "{{ hostvars[inventory_hostname].ansible_host }}"
+}
+
+# Setup data dir
+data_dir = "{{ NOMAD_DATA_DIR }}"
+
+# Give the agent a unique name. Defaults to hostname
+name = "{{ ansible_ssh_host }}"
+
+# Enable the client
+client {
+    enabled = true
+    servers = ["{{ hostvars['nomad-server'].ansible_host }}"]
+}

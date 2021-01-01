@@ -11,7 +11,10 @@
   when: is_nomad_installed.rc != 0
 
 - name: install nomad
-  shell: |
-     cd /tmp && unzip nomad.zip && install nomad /usr/bin
+  shell:
+     cmd: |
+       unzip nomad.zip && install nomad /usr/bin && rm -rf nomad.zip nomad
+       mkdir -p {{ NOMAD_CONFIG_DIR }}
+     chdir: /tmp
   become: yes
   when: is_nomad_installed.rc != 0

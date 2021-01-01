@@ -1,0 +1,2 @@
+NOMAD_CONFIG_DIR: /etc/nomad.d
+NOMAD_DATA_DIR: /opt/nomad

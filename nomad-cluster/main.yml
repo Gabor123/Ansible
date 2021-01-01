@@ -2,3 +2,29 @@
   hosts: all
   roles:
     - nomad-install
+
+- name: bootstrap nomad
+  hosts: nomad-server
+  roles:
+    - nomad-bootstrap
+
+- name: add nomad clients
+  hosts: nomad-agents
+  roles:
+    - nomad-add-client
+
+- name: configure nomad systemd service on all node
+  hosts: all
+  roles:
+    - nomad-systemd
+
+- name: start nomad cluster
+  hosts: all
+  tasks:
+    - name: start nomad servers
+      systemd:
+        name: nomad
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+      become: yes
